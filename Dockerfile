@@ -8,7 +8,7 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 WORKDIR /app
 
 # Copiar el archivo JAR generado por Spring Boot
-COPY target/demo.spring-0.0.1-SNAPSHOT.jar
+COPY target/demo.spring-0.0.1-SNAPSHOT.jar app.jar
 
 # Exponer el puerto en el que se ejecuta la aplicación Spring Boot
 EXPOSE 8080
