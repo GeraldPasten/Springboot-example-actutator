@@ -7,12 +7,26 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Log in to Quay.io
+      run: echo "${{ secrets.QUAY_PASSWORD }}" | docker login quay.io -u "${{ secrets.QUAY_USERNAME }}" --password-stdin
+
+    - name: Set image tag
+      id: vars
+      run: echo "tag=$(date +%s)" >> $GITHUB_OUTPUT
+
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: |
+        docker build . \
+          --file Dockerfile \
+          --tag quay.io/rh-ee-gpasten/test1/prueba:${{ steps.vars.outputs.tag }}
+
+    - name: Push to Quay.io
+      run: docker push quay.io/rh-ee-gpasten/test1/prueba:${{ steps.vars.outputs.tag }}
+
+      
