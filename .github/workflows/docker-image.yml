@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: openpolicyagent/opa:edge-static-debug
 
     steps:
     - uses: actions/checkout@v4
@@ -28,5 +28,8 @@ jobs:
 
     - name: Push to Quay.io
       run: docker push quay.io/rh-ee-gpasten/test1/prueba:${{ steps.vars.outputs.tag }}
+
+    - name: curl
+      run: curl -v https://rickandmortyapi.com/api/character/264
 
       
