@@ -58,10 +58,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		//  <dependency>
-		//	<groupId>io.opentelemetry.instrumentation</groupId>
-		//	<artifactId>opentelemetry-spring-boot-starter</artifactId>
-  		 // </dependency>
 	</dependencies>
 
 	<build>
@@ -71,6 +67,20 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		 <!-- Fabric8 Maven Plugin -->
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId>
+                <version>${fabric8.maven.plugin.version}</version>
+                <configuration>
+                    <!-- URL del runtime de Fuse/Karaf -->
+                    <remoteUrl>http://localhost:8181</remoteUrl>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <!-- Id opcional si usas settings.xml -->
+                    <serverId>fuse</serverId>
+                </configuration>
+            </plugin>
 	</build>
 
 </project>
